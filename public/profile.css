@@ -1,0 +1,284 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  display: flex;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.side-menu {
+  flex: 1;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+  text-align: center;
+}
+
+.feed {
+  flex: 2;
+  padding: 10px;
+}
+
+.post {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+}
+
+.post img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.menu i {
+  font-size: 24px;
+}
+
+/* Reset default styles */
+body, ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Basic styling for the entire page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+/* Header styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #000
+}
+
+.menu input {
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+}
+
+.menu i {
+    margin-left: 20px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Container for side menu and feed */
+.container {
+    display: flex;
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Side menu styles */
+.side-menu {
+    flex: 1;
+    text-align: center;
+}
+
+.side-menu img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.side-menu h2 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.side-menu ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.side-menu li {
+    padding: 10px 0;
+}
+
+.side-menu a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Feed styles */
+.feed {
+    flex: 2;
+    padding: 20px;
+}
+
+/* Sample post styles */
+.post {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.post-info h3 {
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.post-info p {
+    color: #333;
+}
+
+
+
+/* Add styles for the horizontal dividers */
+.side-menu ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+}
+
+.side-menu ul li {
+    margin-right: 10px;
+}
+
+.side-menu ul li:not(:last-child):after {
+    content: "|";
+    color: #ddd; /* Color of the divider */
+    margin-left: 10px; /* Adjust the spacing */
+}
+
+/* Add styles for the horizontal dividers between topics */
+.topic-divider {
+    border-top: 1px solid #ddd;
+    margin: 10px 0;
+}
+
+/* Add styles for the topics and their dividers */
+.topics {
+    margin-top: 10px;
+}
+
+.topics p {
+    margin: 0;
+}
+
+.divider {
+    border-top: 1px solid #ddd;
+    margin: 10px 0;
+}
+
+/* Styles for links */
+.topics a {
+    text-decoration: none;
+    color: #45b6fe; /* Blue color for links */
+}
+
+.menu i {
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+    margin: 0 20px;
+}
+
+.post {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Add spacing between posts */
+
+/* Add CSS for styling the table */
+.post-table {
+    width: 100%; /* Make the table width 100% to fit its container */
+    border-collapse: collapse; /* Collapse table borders */
+    margin-bottom: 20px; /* Add spacing between the table and posts */
+}
+
+.post-table td {
+    border: 1px solid #ddd; /* Add borders to table cells */
+    padding: 10px; /* Add padding to table cells for spacing */
+}
+
+
+/* Styles for the Instagram-style search bar */
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 5px;
+    width: 250px; /* Adjust as needed */
+    cursor: pointer;
+    position: relative;
+}
+
+.insta-search {
+    border: none;
+    background: none;
+    outline: none;
+    width: 100%;
+    padding: 5px;
+    font-size: 14px;
+}
+
+#searchIcon {
+    padding: 0 5px;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    color: #666;
+}
+
+/* Styles for the post container */
+.post-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Adjust post size as needed */
+    gap: 20px; /* Adjust the gap between posts */
+}

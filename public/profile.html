@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <base target="_top" />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ORBI | Profile</title>
+        <link rel="stylesheet" href="profile.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        />
+    </head>
+    <body>
+        <header>
+            <div class="back-arrow" id="backArrow">&larr;</div>
+            <div class="logo-container">
+                <a href="/index.html"
+                    ><div class="logop">
+                        ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ ORBI
+                    </div></a
+                >
+            </div>
+            <div class="search-bar">
+                <input
+                    type="text"
+                    placeholder="Search"
+                    class="insta-search"
+                    id="searchInput"
+                />
+                <i class="fa fa-search" id="searchIcon"></i>
+            </div>
+        </header>
+        <div class="container">
+            <div class="side-menu">
+                <img
+                    id="pfp"
+                    src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+                    alt="Your Profile Picture"
+                />
+                <h2 id="username"></h2>
+                <p id="bio"></p>
+                <p id="follows">Followers: 0</p>
+                <button id="follow-button" class="follow-button">Follow</button>
+                <hr class="horizontal-line" />
+                <p id="status"></p>
+            </div>
+            <div class="feed">
+                <div class="post-container"></div>
+            </div>
+        </div>
+
+        <style>
+            a {
+                text-decoration: none; /* Remove underline */
+                color: #333; /* Change text color to your preferred color */
+                /* You can also add other styles like font-weight, etc. */
+            }
+
+            .back-arrow {
+                font-size: 24px;
+                cursor: pointer;
+                transition: transform 0.3s;
+            }
+
+            .back-arrow.clicked {
+                animation: rotateArrow 1s forwards;
+            }
+
+            @keyframes rotateArrow {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(180deg);
+                }
+            }
+
+            .follow-button {
+                font-size: 20px;
+                border-radius: 5px;
+            }
+
+            .follow-button:hover {
+                transform: scale(1.05);
+                cursor: pointer;
+            }
+
+            html,
+            body {
+                height: 100%;
+                margin: 0;
+            }
+
+            .container {
+                min-height: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+
+            footer {
+                margin-top: auto;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 10vh; /* Adjust the height as needed */
+                background-color: #333; /* Add a background color for the footer */
+            }
+
+            footer p {
+                color: #fff;
+            }
+
+            .post-cell {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                margin: 0; /* Remove margin */
+                padding: 0; /* Remove padding */
+                background-color: #fff;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+                transition: transform 0.2s, box-shadow 0.2s;
+                cursor: pointer; /* Add cursor pointer for click interaction */
+            }
+
+            .post-cell:hover {
+                transform: scale(1.05); /* Zoom in when hovering */
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Add a stronger shadow when hovering */
+            }
+
+            .post-image {
+                max-width: 200px; /* Adjust the image size */
+                max-height: 200px; /* Adjust the image size */
+                margin-bottom: 10px;
+            }
+
+            .post-title {
+                font-size: 16px; /* Adjust the title font size */
+                margin: 0;
+            }
+
+            .post-description {
+                font-size: 14px; /* Adjust the description font size */
+            }
+
+            .post-container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-evenly;
+            }
+
+            .popup {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.7);
+                z-index: 1;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .popup-content {
+                text-align: center;
+                background-color: #fff;
+                border-radius: 10px;
+                max-width: 80%;
+                max-height: 80%;
+                overflow: auto;
+                padding: 20px;
+                position: relative;
+                display: flex; /* Display as flex container */
+            }
+
+            .popup-image {
+                max-width: 50%; /* Adjust the image size to fit */
+                max-height: 100%; /* Adjust the image size to fit */
+            }
+
+            .popup-divider {
+                border-right: 2px solid #ddd; /* Vertical gray line */
+                margin-right: 20px;
+                padding-right: 20px;
+            }
+
+            .popup-user-info {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+            }
+
+            .popup-user-pfp {
+                border-radius: 50%;
+                width: 80px;
+                height: 80px;
+                object-fit: cover;
+            }
+
+            .popup-username {
+                font-size: 16px;
+                font-weight: bold;
+            }
+
+            .popup-title {
+                font-size: 18px;
+                font-weight: bold;
+                margin: 10px 0;
+            }
+
+            .popup-description {
+                font-size: 16px;
+                margin: 10px 0;
+            }
+
+            .popup-close {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                cursor: pointer;
+            }
+
+            .follow-button {
+                font-size: 20px;
+                border-radius: 5px;
+                background-color: lightblue; /* Initial blue color */
+                color: white;
+                padding: 8px 16px;
+                border: none;
+                cursor: pointer;
+            }
+
+            .follow-button.clicked {
+                background-color: red; /* Red color after clicking */
+            }
+            .horizontal-line {
+                border: none; /* Remove default border */
+                border-top: 1px solid #ddd; /* Add a 1px solid gray line */
+                margin: 20px 0; /* Adjust margin as needed */
+            }
+
+            .logo-container {
+                flex: 1; /* This makes the logo container take up available space */
+                display: flex;
+                justify-content: center; /* Center the content horizontally */
+                align-items: center; /* Center the content vertically */
+            }
+
+            .logop {
+                font-size: 2rem;
+                font-weight: bold;
+                text-align: center;
+            }
+        </style>
+        <script>
+
+function getJwtFromCookie() {
+  const name = 'jwt=';
+  const decodedCookie = decodeURIComponent(document.cookie);
+  const cookieArray = decodedCookie.split(';');
+
+  for (let i = 0; i < cookieArray.length; i++) {
+    let cookie = cookieArray[i];
+    while (cookie.charAt(0) === ' ') {
+      cookie = cookie.substring(1);
+    }
+    if (cookie.indexOf(name) === 0) {
+      return cookie.substring(name.length, cookie.length);
+    }
+  }
+  return null; // Return null if the JWT is not found
+}
+
+// Get the JWT
+const jwt = getJwtFromCookie();
+
+
+            const backArrow = document.getElementById("backArrow");
+
+            backArrow.addEventListener("click", () => {
+                backArrow.classList.add("clicked");
+                // Add a timeout to redirect after the animation
+                setTimeout(() => {
+                    window.location.href =
+                        "/index.html";
+                }, 1000);
+            });
+
+            document.addEventListener("DOMContentLoaded", async function () {
+                const postContainer = document.querySelector(".post-container");
+
+                let params = new URLSearchParams(document.location.search);
+                let user = params.get("user");
+
+                document.getElementById("username").innerText = `@${user}`;
+
+                const response = await fetch(`/api/userinfo`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ user: user }),
+                });
+
+                const data = await response.json();
+
+                if (data.error) {
+                    const error = document.getElementById("status");
+                    error.innerText = data.error;
+                    return;
+                }
+
+                const bio = data.bio || "Unknown";
+                document.getElementById("bio").innerText = bio;
+                const pfp =
+                    data.pfp ||
+                    "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
+                const imgElement = document.getElementById("pfp");
+                imgElement.setAttribute("src", pfp);
+                imgElement.setAttribute("alt", "User's pfp");
+                const follows = data.follows || 0;
+                document.getElementById(
+                    "follows"
+                ).innerHTML = `Followers: ${follows}`;
+
+                const posts = data.posts;
+
+                posts.forEach((post) => {
+                    const cell = document.createElement("div");
+                    cell.classList.add("post-cell");
+                    const img = document.createElement("img");
+                    img.classList.add("post-image");
+                    img.setAttribute("src", post.image);
+                    img.setAttribute("alt", post.title);
+                    img.setAttribute("height", "400");
+                    img.setAttribute("width", "400");
+                    img.onclick = function () {
+                        openPopup(
+                            pfp,
+                            user,
+                            post.image,
+                            post.title,
+                            post.description
+                        );
+                    };
+                    const title = document.createElement("h3");
+                    title.innerText = post.title;
+                    title.classList.add("post-title");
+                    const description = document.createElement("p");
+                    description.innerText = post.description;
+                    description.classList.add("post-description");
+
+                    cell.appendChild(img);
+                    postContainer.appendChild(cell);
+                });
+            });
+
+            function openPopup(
+                userPfp,
+                username,
+                imageSrc,
+                title,
+                description
+            ) {
+                const popup = document.createElement("div");
+                popup.classList.add("popup");
+
+                const popupContent = document.createElement("div");
+                popupContent.classList.add("popup-content");
+
+                const popupImage = document.createElement("img");
+                popupImage.classList.add("popup-image");
+                popupImage.setAttribute("src", imageSrc);
+                popupImage.setAttribute("alt", title);
+                popupImage.setAttribute("height", "400");
+                popupImage.setAttribute("width", "400");
+
+                const popupDivider = document.createElement("div");
+                popupDivider.classList.add("popup-divider");
+
+                const popupUser = document.createElement("div");
+                popupUser.classList.add("popup-user-info");
+
+                const popupUserPfp = document.createElement("img");
+                popupUserPfp.classList.add("popup-user-pfp");
+                popupUserPfp.setAttribute("src", userPfp);
+                popupUserPfp.setAttribute("alt", "User's pfp");
+                
+
+                const popupUsername = document.createElement("span");
+                popupUsername.classList.add("popup-username");
+                popupUsername.innerText = username;
+
+                const popupTitle = document.createElement("h3");
+                popupTitle.innerText = title;
+                popupTitle.classList.add("popup-title");
+
+                const popupDescription = document.createElement("p");
+                popupDescription.innerText = description;
+                popupDescription.classList.add("popup-description");
+
+                const popupClose = document.createElement("span");
+                popupClose.classList.add("popup-close");
+                popupClose.innerHTML = "&#10006;"; // Close symbol
+                popupClose.onclick = function (event) {
+                    event.stopPropagation(); // Prevent closing when clicking inside the popup
+                    popup.remove();
+                };
+
+                popupUser.appendChild(popupUserPfp);
+                popupUser.appendChild(popupUsername);
+
+                popupContent.appendChild(popupImage);
+                popupContent.appendChild(popupDivider);
+                popupContent.appendChild(popupUser);
+                popupContent.appendChild(popupTitle);
+                popupContent.appendChild(popupDescription);
+                popupContent.appendChild(popupClose);
+
+                popup.appendChild(popupContent);
+                document.body.appendChild(popup);
+
+                popup.onclick = function () {
+                    popup.remove();
+                };
+
+                popup.style.display = "flex";
+            }
+
+            document
+                .getElementById("follow-button")
+                .addEventListener("click", async function () {
+                    if (!jwt || jwt == "") return document.getElementById('status').innerText = "You are not logged in. You must be logged in to follow a user."
+
+                    
+                    const button = document.getElementById("follow-button");
+
+                    let follow = true;
+
+                    if (button.innerText === "Follow") follow = true;
+                    if (button.innerText === "Unfollow") follow = false;
+
+                    let params = new URLSearchParams(document.location.search);
+                    let user = params.get("user");
+
+                    const response = await fetch(`/api/userinfo/follow`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ userJwt: jwt, userToFollow: user, follow: follow }),
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        if (button.textContent == "Follow") {
+                            button.textContent = "Unfollow";
+                            button.classList.add("clicked");
+                            document.getElementById(
+                                "follows"
+                            ).innerText = `Followers: ${data.follows}`;
+                        } else {
+                            button.textContent = "Follow";
+                            button.classList.remove("clicked");
+                            document.getElementById(
+                                "follows"
+                            ).innerText = `Followers: ${data.follows}`;
+                        }
+                    }
+                });
+            function redirectToProfile() {
+                var searchText = document.getElementById("searchInput").value;
+                if (searchText) {
+                    window.location.href = "/profile.html?user=" + searchText;
+                } else {
+                    alert("Please enter a valid user."); // Display an alert if the input is empty
+                }
+            }
+
+            document
+                .getElementById("searchInput")
+                .addEventListener("keyup", function (event) {
+                    if (event.key === "Enter") {
+                        redirectToProfile();
+                    }
+                });
+
+            document
+                .getElementById("searchIcon")
+                .addEventListener("click", function () {
+                    redirectToProfile();
+                });
+
+            if (window.innerWidth <= 768) {
+                // Redirect to Google
+                window.location.href = "/mobile-view.html";
+            }
+        </script>
+
+        <footer>
+            <center>
+                <p>Copyright @Orbi 2023</p>
+            </center>
+        </footer>
+    </body>
+</html>

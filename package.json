@@ -1,0 +1,33 @@
+{
+    "name": "orbi",
+    "version": "1.0.0",
+    "description": "Orbi is a social media platform designed to connect people and communities. It offers a space for users to share their interests, engage with like-minded individuals, and explore a wide range of topics. Enter your email below to be the first to recieve a notification when we are live!",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "bot": "node ./_discord/index.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@types/node": "^18.0.6",
+        "axios": "^1.6.1",
+        "colors": "^1.4.0",
+        "cors": "^2.8.5",
+        "discord.js": "^14.14.1",
+        "dotenv": "^16.3.1",
+        "express": "^4.18.2",
+        "jsonwebtoken": "^9.0.2",
+        "mdb-easydata": "^1.0.0-alpha5",
+        "mongodb": "^6.1.0",
+        "mongoose": "^8.0.0",
+        "morgan": "^1.10.0",
+        "multer": "^1.4.5-lts.1",
+        "node-fetch": "^3.2.6",
+        "winston": "^3.11.0"
+    },
+    "devDependencies": {
+        "nodemon": "^3.0.1"
+    }
+}

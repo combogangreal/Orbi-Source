@@ -1,0 +1,2 @@
+# Orbi Source
+This is the clown social media app "Orbi"'s source, they had no license orginally, and lied about having a regreisted company, and threanted legal action, we hid all the personal stuff like tokens though. You can check out the original readme [here](./ORBI.md)

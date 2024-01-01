@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <base target="_top" />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ORBI | Home</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        />
+        <meta
+            name="description"
+            content="This is a brief description of your website."
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="./favicon-32x32.png"
+        />
+        <meta name="theme-color" content="#ffffff" />
+    </head>
+    <body>
+        <style>
+            a {
+                text-decoration: none; /* Remove underline */
+                color: #333; /* Change text color to your preferred color */
+                /* You can also add other styles like font-weight, etc. */
+            }
+
+            header {
+                display: flex;
+                align-items: center;
+            }
+
+            .logo {
+                flex: 1;
+            }
+
+            .search-bar {
+                margin-right: 1em; /* Add a bit of gap on the right side */
+                display: flex;
+                align-items: center;
+            }
+
+            .search-bar input {
+                margin-right: 0.5em; /* Add a bit of gap to the right of the input */
+            }
+
+            .icon-container {
+                width: 30px;
+                height: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .icon-container img {
+                max-width: 100%;
+                max-height: 100%;
+            }
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .modal-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        text-align: center;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .close:hover {
+        color: black;
+    }
+        </style>
+        <header>
+            <div class="logo">ORBI</div>
+            <div class="search-bar">
+                <input
+                    type="text"
+                    placeholder="Search"
+                    class="insta-search"
+                    id="searchInput"
+                    required
+                />
+                <i class="fa fa-search" id="searchIcon"></i>
+            </div>
+            <div class="icon-container">
+                <a href="upload.html"
+                    ><img
+                        src="data:image/png;base64,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"
+                        alt="Home"
+                /></a>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="side-menu">
+                <img
+                    src="https://i.natgeofe.com/n/4fa9e5cc-5766-4524-ad84-5842565e528d/20201209_winters_spacex_sn8launch-9597_2x3.jpg?w=374&h=561"
+                    alt="Your Profile Picture"
+                />
+                <h2 id="username">Username</h2>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Explore</a></li>
+                    <li><a href="#">Notifications</a></li>
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="/premium.html">Premium</a></li>
+                </ul>
+                <div class="topic-divider"></div>
+                <div class="topics">
+                    <h3>Popular:</h3>
+                    <li><a href="/profile.html?user=orbi">@ORBI</a></li>
+                    <div class="divider"></div>
+                    <li>
+                        <a href="/profile.html?user=techknowledge">@sparks</a>
+                    </li>
+                    <div class="divider"></div>
+                    <li>
+                        <a href="/profile.html?user=techknowledge">@cheese</a>
+                    </li>
+                    <div class="divider"></div>
+                    <li><a href="/profile.html?user=pico">@picobot</a></li>
+                </div>
+            </div>
+
+            <div class="feed" id="feed">
+                <center><h1>Posts</h1></center>
+                <div class="divider"></div>
+            </div>
+        </div>
+        <script>
+function openModal(post) {
+    const modal = document.getElementById('postModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDescription = document.getElementById('modalDescription');
+
+    const parsedPost = typeof post === 'object' ? post : JSON.parse(post); // Parse the JSON string if needed
+    modalImage.src = parsedPost.image;
+    modalTitle.innerText = parsedPost.title;
+    modalDescription.innerText = parsedPost.description;
+
+    modal.style.display = 'block';
+}
+
+
+        function closeModal() {
+            const modal = document.getElementById('postModal');
+            modal.style.display = 'none';
+        }
+
+            function redirectToProfile() {
+                var searchText = document.getElementById("searchInput").value;
+                if (searchText) {
+                    window.location.href = "/profile.html?user=" + searchText;
+                } else {
+                    alert("Please enter a valid user."); // Display an alert if the input is empty
+                }
+            }
+
+            document
+                .getElementById("searchInput")
+                .addEventListener("keyup", function (event) {
+                    if (event.key === "Enter") {
+                        redirectToProfile();
+                    }
+                });
+
+            document
+                .getElementById("searchIcon")
+                .addEventListener("click", function () {
+                    redirectToProfile();
+                });
+
+            if (window.innerWidth <= 768) {
+                // Redirect to Google
+                window.location.href = "/mobile-view.html";
+            }
+
+            document.addEventListener("DOMContentLoaded", async function () {
+
+                function getJwtFromCookie() {
+  const name = 'jwt=';
+  const decodedCookie = decodeURIComponent(document.cookie);
+  const cookieArray = decodedCookie.split(';');
+
+  for (let i = 0; i < cookieArray.length; i++) {
+    let cookie = cookieArray[i];
+    while (cookie.charAt(0) === ' ') {
+      cookie = cookie.substring(1);
+    }
+    if (cookie.indexOf(name) === 0) {
+      return cookie.substring(name.length, cookie.length);
+    }
+  }
+  return null; // Return null if the JWT is not found
+}
+
+// Get the JWT
+const jwt = getJwtFromCookie();
+
+const response = await fetch(`/api/fyp`, {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ jwt }),
+});
+
+const result = await response.json();
+
+if (!result.data || result.data.length === 0) {
+    return document.getElementById('status').innerText = "No posts found.";
+}
+
+const feed = document.getElementById('feed');
+
+result.data.forEach((user) => {
+    const posts = user.posts; // Assuming the property is called 'posts'
+
+    if (!posts || posts.length === 0) {
+        return;
+    }
+
+                posts.forEach((post) => {
+                    const resultElement = document.createElement('div');
+                    feed.appendChild(resultElement);
+
+                    resultElement.classList.add('postElement');
+                    resultElement.innerHTML = `
+                    <!-- Modify this part to include a click event -->
+                    <div style="cursor: pointer; display: flex; margin-bottom: 20px; padding: 10px; border: 1px solid #ddd; background-color: #fff; border-radius: 10px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);" onclick="openModal(${JSON.stringify(
+                        post
+                    )})">
+                        <img src="${post.image}" alt="Post Image" style="width: 300px; height: 300px; margin-right: 10px;">
+                        <div style="flex: 1;">
+                            <h3 style="font-weight: bold; margin: 10px 0;">${post.title}</h3>
+                            <p style="color: #555;">${post.description}</p>
+                        </div>
+                    </div>
+                    `;
+                });
+            });
+
+        })
+        </script>
+        <footer>
+            <center>
+                <p>Copyright @Orbi 2023</p>
+            </center>
+        </footer>
+        <div id="postModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <img id="modalImage" src="" alt="Post Image" style="width: 100%;">
+                <h2 id="modalTitle"></h2>
+                <p id="modalDescription"></p>
+            </div>
+        </div>
+    </body>
+</html>

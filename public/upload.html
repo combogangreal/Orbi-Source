@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <base target="_top" />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ORBI | Post</title>
+        <link rel="stylesheet" href="styles.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        />
+    </head>
+    <body>
+        <style>
+            .post-title,
+            .post-description,
+            #image-upload {
+                width: 100%;
+                padding: 10px;
+                margin: 10px 0;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                font-size: 16px;
+            }
+
+            /* Custom styling for the upload button */
+            .custom-upload {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                padding: 10px;
+                background-color: #405de6;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                font-size: 16px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            .custom-upload:hover {
+                background-color: #314db5;
+            }
+
+            .custom-upload i {
+                margin-right: 10px;
+            }
+
+            #image-upload {
+                display: none;
+            }
+
+            .submit-button {
+                background-color: #405de6;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                padding: 10px;
+                font-size: 16px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            .submit-button:hover {
+                background-color: #314db5;
+            }
+
+            /* Style for image preview */
+            .image-preview {
+                text-align: center;
+                margin-top: 20px;
+            }
+
+            .image-preview img {
+                max-width: 100%;
+                max-height: 300px;
+            }
+
+            .new-post h2 {
+                font-size: 18px;
+                margin-bottom: 10px;
+            }
+
+            header {
+                display: flex;
+                align-items: center;
+            }
+
+            .logo {
+                flex: 1;
+            }
+
+            .search-bar {
+                margin-right: 1em; /* Add a bit of gap on the right side */
+                display: flex;
+                align-items: center;
+            }
+
+            .search-bar input {
+                margin-right: 0.5em; /* Add a bit of gap to the right of the input */
+            }
+
+            .icon-container {
+                width: 30px;
+                height: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .icon-container img {
+                max-width: 100%;
+                max-height: 100%;
+            }
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+
+            header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px;
+                background-color: #fff;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            .container {
+                display: flex;
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+
+            .side-menu {
+                flex: 1;
+                padding: 10px;
+                border-right: 1px solid #ddd;
+                text-align: center;
+            }
+
+            .feed {
+                flex: 2;
+                padding: 10px;
+            }
+
+            .post {
+                margin: 20px 0;
+                display: flex;
+                align-items: center;
+            }
+
+            .post img {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                margin-right: 10px;
+            }
+
+            .menu {
+                display: flex;
+                justify-content: space-between;
+                padding: 10px;
+                background-color: #fff;
+                box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            .menu i {
+                font-size: 24px;
+            }
+
+            /* Reset default styles */
+            body,
+            ul {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+            }
+
+            /* Basic styling for the entire page */
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f0f0f0;
+            }
+
+            /* Header styles */
+            header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                background-color: #fff;
+                padding: 10px 20px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            .logo {
+                font-size: 2rem;
+                font-weight: bold;
+                color: #000;
+            }
+
+            .menu input {
+                padding: 8px;
+                border: none;
+                border-radius: 5px;
+            }
+
+            .menu i {
+                margin-left: 20px;
+                font-size: 20px;
+                cursor: pointer;
+            }
+
+            /* Container for side menu and feed */
+            .container {
+                display: flex;
+                max-width: 1200px;
+                justify-content: center;
+                margin: 20px auto;
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            /* Side menu styles */
+            .side-menu {
+                flex: 1;
+                padding: 20px;
+                border-right: 1px solid #ddd;
+                text-align: center;
+            }
+
+            .side-menu img {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                margin-bottom: 10px;
+            }
+
+            .side-menu h2 {
+                font-size: 1.2rem;
+                font-weight: bold;
+                margin-bottom: 10px;
+            }
+
+            .side-menu ul {
+                list-style-type: none;
+                padding: 0;
+            }
+
+            .side-menu li {
+                padding: 10px 0;
+            }
+
+            .side-menu a {
+                text-decoration: none;
+                color: #333;
+                font-weight: bold;
+            }
+
+            /* Feed styles */
+            .feed {
+                flex: 2;
+                padding: 20px;
+            }
+
+            /* Sample post styles */
+            .post {
+                margin-bottom: 20px;
+                padding: 10px;
+                border: 1px solid #ddd;
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            .post img {
+                width: 100%;
+                border-radius: 10px;
+            }
+
+            .post-info h3 {
+                font-weight: bold;
+                margin: 10px 0;
+            }
+
+            .post-info p {
+                color: #333;
+            }
+
+            footer {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 10vh;
+                background-color: #333;
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+            }
+
+            footer p {
+                color: #fff;
+            }
+
+            /* Add styles for the horizontal dividers */
+            .side-menu ul {
+                list-style-type: none;
+                padding: 0;
+                display: flex;
+            }
+
+            .side-menu ul li {
+                margin-right: 10px;
+            }
+
+            .side-menu ul li:not(:last-child):after {
+                content: "|";
+                color: #ddd; /* Color of the divider */
+                margin-left: 10px; /* Adjust the spacing */
+            }
+
+            /* Add styles for the horizontal dividers between topics */
+            .topic-divider {
+                border-top: 1px solid #ddd;
+                margin: 10px 0;
+            }
+
+            /* Add styles for the topics and their dividers */
+
+            .topics p {
+                margin: 0;
+            }
+
+            .divider {
+                border-top: 1px solid #ddd;
+                margin: 10px 0;
+            }
+
+            .topics a {
+                display: flex; /* Use flex to align items horizontally */
+                align-items: center; /* Align items vertically in the center */
+                text-decoration: none;
+                color: #878787; /* Blue color for links */
+            }
+
+            .menu i {
+                font-size: 24px;
+                cursor: pointer;
+                color: #333;
+                margin: 0 20px;
+            }
+
+            .post {
+                margin: 20px 0;
+                padding: 10px;
+                border: 1px solid #ddd;
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            /* Add spacing between posts */
+            table {
+                border-spacing: 20px;
+            }
+
+            /* Add CSS for styling the table */
+            .post-table {
+                width: 100%; /* Make the table width 100% to fit its container */
+                border-collapse: collapse; /* Collapse table borders */
+                margin-bottom: 20px; /* Add spacing between the table and posts */
+            }
+
+            .post-table td {
+                border: 1px solid #ddd; /* Add borders to table cells */
+                padding: 10px; /* Add padding to table cells for spacing */
+            }
+
+            /* Styles for the Instagram-style search bar */
+            .search-bar {
+                display: flex;
+                align-items: center;
+                background-color: #f1f1f1;
+                border-radius: 5px;
+                padding: 5px;
+                width: 250px; /* Adjust as needed */
+                cursor: pointer;
+                position: relative;
+            }
+
+            .insta-search {
+                border: none;
+                background: none;
+                outline: none;
+                width: 100%;
+                padding: 5px;
+                font-size: 14px;
+            }
+
+            #searchIcon {
+                padding: 0 5px;
+                cursor: pointer;
+                position: absolute;
+                right: 10px;
+                color: #666;
+            }
+
+            /* Styles for the post container */
+            .post-container {
+                display: grid;
+                grid-template-columns: repeat(
+                    auto-fill,
+                    minmax(300px, 1fr)
+                ); /* Adjust post size as needed */
+                gap: 20px; /* Adjust the gap between posts */
+            }
+
+            .new-post {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .form {
+                width: 100%;
+                max-width: 400px;
+            }
+
+            a {
+                text-decoration: none; /* Remove underline */
+                color: #333; /* Change text color to your preferred color */
+                /* You can also add other styles like font-weight, etc. */
+            }
+        </style>
+        <header>
+            <a href="/index.html"><div class="logo">ORBI</div></a>
+            <div class="search-bar">
+                <input
+                    type="text"
+                    placeholder="Search"
+                    class="insta-search"
+                    input="searchInput"
+                />
+                <i class="fa fa-search" id="searchIcon"></i>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="new-post">
+                <h2>New Post</h2>
+                <div class="form">
+                    <input
+                        type="text"
+                        placeholder="Post title"
+                        class="post-title"
+                    />
+                    <input
+                        rows="5"
+                        type="text"
+                        placeholder="Post description"
+                        class="post-description"
+                    />
+                    <label for="image-upload" class="custom-upload">
+                        <i class="fa fa-camera" aria-hidden="true"></i>
+                        Upload Image
+                    </label>
+                    <p>‎</p>
+                    <input
+                        type="file"
+                        id="image-upload"
+                        accept="image/*"
+                        style="display: none"
+                    />
+                    <button class="submit-button">Create Post</button>
+                </div>
+                <div class="image-preview">
+                    <img
+                        id="preview-image"
+                        src="placeholder-image.jpg"
+                        alt="Preview"
+                    />
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Function to handle image file input and update the image preview
+            function handleImageUpload() {
+                const imageUpload = document.getElementById("image-upload");
+                const imagePreview = document.getElementById("preview-image");
+                const sampleImage =
+                    "https://icones.pro/wp-content/uploads/2021/08/icone-photo-grise.png";
+
+                // Set the initial sample image
+                imagePreview.src = sampleImage;
+
+                imageUpload.addEventListener("change", (event) => {
+                    const file = event.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            imagePreview.src = e.target.result;
+                        };
+                        reader.readAsDataURL(file);
+                    } else {
+                        imagePreview.src = sampleImage;
+                    }
+                });
+            }
+
+            // Attach the function to the input element
+            handleImageUpload();
+
+            function redirectToProfile() {
+                var searchText = document.getElementById("searchInput").value;
+                if (searchText) {
+                    window.location.href = "/profile.html?user=" + searchText;
+                } else {
+                    alert("Please enter a valid user."); // Display an alert if the input is empty
+                }
+            }
+
+            document
+                .getElementById("searchInput")
+                .addEventListener("keyup", function (event) {
+                    if (event.key === "Enter") {
+                        redirectToProfile();
+                    }
+                });
+
+            document
+                .getElementById("searchIcon")
+                .addEventListener("click", function () {
+                    redirectToProfile();
+                });
+        </script>
+
+        <footer>
+            <center>
+                <p>Copyright @ORBI 2023</p>
+            </center>
+        </footer>
+    </body>
+</html>

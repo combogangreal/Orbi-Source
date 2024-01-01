@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8" />
+        <title>ORBI | Login</title>
+        <link rel="stylesheet" href="styles.css" />
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap");
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: "Poppins", sans-serif;
+            }
+            body {
+                background: linear-gradient(90deg, #12c2e9, #f64f59);
+                background-size: cover;
+                height: 100vh;
+                background-color: #ffffff;
+            }
+            .navbar {
+                background: rgba(
+                    255,
+                    255,
+                    255,
+                    0.8
+                ); /* Background with some opacity */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 60px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            .navbar .logo {
+                color: #000000;
+                font-size: 24px;
+                font-weight: bold;
+            }
+            .center {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                max-width: 420px;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.8);
+                border-radius: 10px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+            }
+            .center h2 {
+                text-align: center;
+                padding: 20px 0;
+                border-bottom: 1px solid silver;
+            }
+            .center form {
+                padding: 0 40px;
+                box-sizing: border-box;
+            }
+            form .txt_field {
+                position: relative;
+                border-bottom: 2px solid #adadad;
+                margin: 30px 0;
+            }
+            .txt_field input {
+                width: 100%;
+                padding: 0 5px;
+                height: 40px;
+                font-size: 16px;
+                border: none;
+                background: none;
+                outline: none;
+            }
+            .txt_field label {
+                position: absolute;
+                top: 50%;
+                left: 5px;
+                color: #adadad;
+                transform: translateY(-50%);
+                font-size: 16px;
+                pointer-events: none;
+                transition: 0.5s;
+            }
+            .txt_field span::before {
+                content: "";
+                position: absolute;
+                top: 40px;
+                left: 0;
+                width: 0%;
+                height: 2px;
+                background: #2691d9;
+                transition: 0.5s;
+            }
+            .txt_field input:focus ~ label,
+            .txt_field input:valid ~ label {
+                top: -5px;
+                color: #2691d9;
+            }
+            .txt_field input:focus ~ span::before,
+            .txt_field input:valid ~ span::before {
+                width: 100%;
+            }
+            .pass {
+                margin: -5px 0 20px 5px;
+                color: #a6a6a6;
+                cursor: pointer;
+            }
+            .pass:hover {
+                text-decoration: underline;
+            }
+            input[type="button"] {
+                width: 100%;
+                height: 50px;
+                background: #2691d9;
+                border-radius: 25px;
+                font-size: 18px;
+                color: #e9f4fb;
+                font-weight: 700;
+                cursor: pointer;
+                outline: none;
+                transition: 0.5s;
+                border: none;
+            }
+            input[type="button"]:hover {
+                border-color: #2691d9;
+            }
+            .signup_link {
+                margin: 30px 0;
+                text-align: center;
+                font-size: 16px;
+                color: #666666;
+            }
+            .signup_link a {
+                color: #2691d9;
+                text-decoration: none;
+            }
+            .signup_link a:hover {
+                text-decoration: underline;
+            }
+            .cookie-consent {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background: #333;
+                color: #fff;
+                text-align: center;
+                padding: 10px 0;
+                display: none;
+            }
+
+            .cookie-consent button {
+                background: #4caf50;
+                color: #fff;
+                border: none;
+                padding: 5px 15px;
+                margin: 0 10px;
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="navbar">
+            <h1 class="logo">Orbi</h1>
+        </div>
+        <div class="center">
+            <h2>Login</h2>
+            <p id="status"></p>
+            <form method="post">
+                <div id="username" class="txt_field">
+                    <input type="text" required />
+                    <span></span>
+                    <label>Username</label>
+                </div>
+                <div id="password" class="txt_field">
+                    <input type="password" required />
+                    <span></span>
+                    <label>Password</label>
+                </div>
+                <div class="pass">Forgot Password?</div>
+                <input type="button" onclick="login()" value="Login" />
+                <!-- Use type="button" to prevent form submission -->
+                <div class="signup_link">
+                    Haven't registered yet? <a href="/signup.html">Signup</a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Add cookie consent banner -->
+        <div class="cookie-consent" id="cookieConsent">
+            This site uses cookies. By clicking "Agree," you consent to our use
+            of cookies.
+            <button onclick="closeCookieConsent()">Agree</button>
+        </div>
+
+        <script>
+            if (window.innerWidth <= 768) {
+                // Redirect to Google
+                window.location.href = "/mobile-view.html";
+            }
+
+            async function login() {
+                const user = document
+                    .getElementById("username")
+                    .querySelector("input").value;
+                const password = document
+                    .getElementById("password")
+                    .querySelector("input").value;
+                const response = await fetch(`/api/login`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ user, password }),
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    return document.getElementById(
+                        "status"
+                    ).innerText = `Logged in successfully as ${user}.`;
+                } else {
+                    return document.getElementById(
+                        "status"
+                    ).innerText = `error: ${data.error}`;
+                }
+            }
+
+            // Function to close the cookie consent banner
+            function closeCookieConsent() {
+                const cookieConsent = document.getElementById("cookieConsent");
+                cookieConsent.style.display = "none";
+            }
+
+            // Show the cookie consent banner after 10 seconds
+            setTimeout(() => {
+                const cookieConsent = document.getElementById("cookieConsent");
+                cookieConsent.style.display = "block";
+            }, 10000);
+        </script>
+    </body>
+</html>

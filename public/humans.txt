@@ -1,0 +1,28 @@
+  __  ____  ____  __       
+ /  \(  _ \(  _ \(  )
+(  O ))   / ) _ ( )( 
+ \__/(__\_)(____/(__)
+
+/* About */
+    Welcome to Orbi, thanks for checking us out :)
+
+/* Developers */
+    API: roc.py (on Discord) / jadenlabs
+    Contact: jadenlabs@proton.me
+    GitHub: https://github.com/JadenLabs
+    From: United States
+    Notes: The first web project I have helped worked on :0
+
+    API: devcheese
+    Contact: cheese@pixelize.dev
+    GitHub: https://github.com/cheeseeu
+    From: United Kingdom
+    Notes: Basically my first proper app like this one
+
+/* Tech */
+    Express.JS 😎 #pro
+
+/* Notes */
+- [13/11/2023] roc was here
+- [14/11/2023] cheese was here
+- [14/11/2023] yo what's up cheese
